@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PonjoPastes</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="PonjoPastes | All">
+    <meta property="og:site_name" content="Ponjo Studios">
+    <meta property="og:description" content="View all pastes.">
+    <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png">
+    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png">
+    <meta name="theme-color" content="#cc9f45">
+    <meta name="keywords" content="ben petrillo, petrillo, ponjo api, ponjo studios, elixir music bot, ben petrillo portfolio, ponjopastes">
+    <link rel="icon" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png" type="img/png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+</head>
+<body>
+<div class="container my-5">
+    <div class="text-center">
+        <h1 class="display-5 text-center mb-3">All PonjoPastes</h1>
+        <p>
+            Below you can view all pastes. Please note: any paste that you make will be publicly accessible. By making
+            a paste, you are agreeing to our Terms & Conditions.
+        </p>
+        <p>
+            PonjoPastes is a website that allows users to share plain text through public posts known as "ponjopastes".
+            Codesharing directly in IRC channels (and other messaging applications) disrupts the flow of messages or
+            can alter the code itself. Users require a third-party site where they can share plain text blocks as a
+            link, allowing other users to easily access and edit it.
+        </p>
+        <p>
+            PonjoPastes makes it easy for you to share long text blocks with friends, without hassle.
+        </p>
+        <a href="https://pastes.ponjo.club">
+            <button class="btn btn-secondary" id="headers">
+                Create Paste
+            </button>
+        </a>
+        <a href="https://app.ponjo.club">
+            <button class="btn btn-secondary" id="transform" >
+                Ponjo Studios
+            </button>
+        </a>
+    </div>
+    <hr style="padding: 10px;">
+    <% for (let i = 0; i < files.length; i++) { %>
+        <div class="card" id="paste-body">
+            <div class="card-header">
+                ID: <%= ids[i] %>
+            </div>
+            <div class="card-body">
+                <pre style="white-space:pre-wrap;"><%= files[i] %></pre>
+            </div>
+        </div>
+        <div style="margin: 15px;"></div>
+    <% } %>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+</body>
+</html>

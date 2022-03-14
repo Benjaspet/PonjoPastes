@@ -1,0 +1,9 @@
+{
+  "allowJs": true,
+  "compilerOptions": {
+    "outDir": "./target/",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  }
+}
