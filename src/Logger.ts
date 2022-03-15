@@ -25,7 +25,7 @@ export default class Logger {
      */
 
     public static info(message: string = "None specified."): void {
-        console.log(`[${new Date().toLocaleTimeString()}] [PONJO-API] ${message}`);
+        console.log(`[${new Date().toLocaleTimeString()}] [PONJOPASTES] ${message}`);
     }
 
     /**
@@ -35,7 +35,7 @@ export default class Logger {
      */
 
     public static error(message: string = "Unknown."): void {
-        console.log(`[${new Date().toLocaleTimeString()}] [PONJO-API] ${message}`);
+        console.log(`[${new Date().toLocaleTimeString()}] [PONJOPASTES] ${message}`);
     }
 
     /**
