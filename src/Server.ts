@@ -21,12 +21,13 @@ import express from "express";
 import * as http from "http";
 import Logger from "./Logger";
 import RestApplication from "./api/RestApplication";
-import {createFormPostRequest, renderHomepage, renderAllPastes, handle404s} from "./api/Internals";
+import {createFormPostRequest, renderHomepage, renderAllPastes, handle404s, getPasteById} from "./api/Internals";
 
 const app: Express = express();
 
 new RestApplication(app);
 
+getPasteById(app);
 createFormPostRequest(app);
 renderHomepage(app);
 renderAllPastes(app);
