@@ -32,10 +32,10 @@ export default class RestApplication {
 
     private handle(): void {
 
-        this.app.use(bodyParser.urlencoded({extended: true}));
-        this.app.use(bodyParser.json());
-        this.app.use(bodyParser.raw());
-        this.app.use(bodyParser.text());
+        this.app.use(bodyParser.urlencoded({extended: true, limit: "50mb"}));
+        this.app.use(bodyParser.json({limit: "50mb"}));
+        this.app.use(bodyParser.raw({limit: "50mb"}));
+        this.app.use(bodyParser.text({limit: "50mb"}));
 
         this.app.use("/api/v1", Router);
         this.app.set("view engine", "ejs");

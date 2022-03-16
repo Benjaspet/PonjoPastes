@@ -61,13 +61,12 @@ export function getPasteById(app: Express): void {
 }
 
 export function renderAllPastes(app: Express): void {
-    app.get("/all/list", async (req: Request, res: Response, next: NextFunction) => {
+    app.get("/pastes/all", async (req: Request, res: Response, next: NextFunction) => {
         let data = []; let names = [];
         fs.readdirSync(path.join(__dirname, "/../../pastes/"), "utf8").forEach((file) => {
             data.push(fs.readFileSync(path.join(__dirname, "/../../pastes/") + file, "utf8"));
             names.push(file.split(".")[0]);
         });
-        console.log(data, names)
         res.render("all", {files: data, ids: names});
     });
 }

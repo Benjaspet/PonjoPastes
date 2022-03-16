@@ -35,27 +35,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" id="hljs-theme" media="">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body style="background-color: #151618;">
 <div class="container my-5">
     <div class="text-center">
         <h2 class="display-5 text-center mb-3 text-white">PonjoPastes</h2>
         <p class="text-white">
-            PonjoPastes is a website that allows users to share plain text through public posts known as "ponjopastes".
-            Codesharing directly in IRC channels (and other messaging applications) disrupts the flow of messages or
-            can alter the code itself. Users require a third-party site where they can share plain text blocks as a
-            link, allowing other users to easily access and edit it.
-        </p>
-        <p class="text-white">
-            PonjoPastes makes it easy for you to share long text blocks with friends, without hassle.
+            Easily share long text blocks with friends, without hassle.
         </p>
         <a href="https://pastes.ponjo.club">
             <button class="btn btn-secondary" id="headers">
                 Create Paste
             </button>
         </a>
-        <a href="https://pastes.ponjo.club/docs">
+        <a href="https://docs.ponjo.club">
             <button class="btn btn-secondary" id="transform" >
                 API Documentation
             </button>
@@ -122,14 +115,13 @@
                 {
                     "message": "Success.",
                     "paste": {
-                        "content": "An apple a day keeps the doctor away.",
+                        "content": "Hello world!",
                         "id": "mvDZ1RZJG",
                         "url": "https://pastes.ponjo.club/mvDZ1RZJG",
                         "contentLength": 37
                     }
                 }
             </code>
-        </pre>
         </pre>
     </div>
 </div>
@@ -145,6 +137,7 @@
         element.innerHTML = element.innerHTML.replace(/                /g, "");
     });
 </script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 </body>

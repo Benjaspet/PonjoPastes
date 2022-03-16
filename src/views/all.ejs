@@ -14,48 +14,57 @@
     <meta name="keywords" content="ben petrillo, petrillo, ponjo api, ponjo studios, elixir music bot, ben petrillo portfolio, ponjopastes">
     <link rel="icon" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png" type="img/png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <style>
+        a:hover {
+            text-decoration: underline;
+            color: cornflowerblue;
+        }
+        .ponjo-link {
+            color: cornflowerblue;
+        }
+        .ponjo-link:hover {
+            color: cornflowerblue;
+        }
+    </style>
 </head>
-<body>
+<body style="background-color: #151618;">
 <div class="container my-5">
     <div class="text-center">
-        <h1 class="display-5 text-center mb-3">All PonjoPastes</h1>
-        <p>
-            Below you can view all pastes. Please note: any paste that you make will be publicly accessible. By making
-            a paste, you are agreeing to our Terms & Conditions.
-        </p>
-        <p>
-            PonjoPastes is a website that allows users to share plain text through public posts known as "ponjopastes".
-            Codesharing directly in IRC channels (and other messaging applications) disrupts the flow of messages or
-            can alter the code itself. Users require a third-party site where they can share plain text blocks as a
-            link, allowing other users to easily access and edit it.
-        </p>
-        <p>
-            PonjoPastes makes it easy for you to share long text blocks with friends, without hassle.
+        <h1 class="display-5 text-center text-white mb-3">All PonjoPastes</h1>
+        <p class="text-white">
+            Easily share long text blocks with friends, without hassle.
         </p>
         <a href="https://pastes.ponjo.club">
             <button class="btn btn-secondary" id="headers">
                 Create Paste
             </button>
         </a>
-        <a href="https://app.ponjo.club">
+        <a href="https://docs.ponjo.club">
             <button class="btn btn-secondary" id="transform" >
-                Ponjo Studios
+                API Documentation
             </button>
         </a>
     </div>
     <hr style="padding: 10px;">
     <% for (let i = 0; i < files.length; i++) { %>
         <div class="card" id="paste-body">
-            <div class="card-header">
-                ID: <%= ids[i] %>
+            <div class="card-header text-white" style="background-color: #282c34">
+                ID: <%= ids[i] %> | <strong><a href="https://pastes/ponjo.club/<%= ids[i] %>" class="ponjo-link">Direct URL</a></strong>
             </div>
-            <div class="card-body">
-                <pre style="white-space:pre-wrap;"><%= files[i] %></pre>
+            <div class="card-body text-white" style="background-color: #282c34">
+                <pre style="white-space: pre-wrap;" class="text-white"><%= files[i] %></pre>
             </div>
         </div>
         <div style="margin: 15px;"></div>
     <% } %>
 </div>
+<footer class="massfoot mt-auto">
+    <div class="inner text-white text-center">
+        <p style="margin-bottom: 25px;">
+            © <a href="https://ponjo.club" class="text-white text-underline">Ponjo Studios</a> 2022. All rights reserved.
+        </p>
+    </div>
+</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 </body>
 </html>

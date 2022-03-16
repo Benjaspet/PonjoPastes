@@ -20,7 +20,6 @@ import {Request, Response, Router} from "express";
 import shortid from "shortid";
 import fs from "fs";
 import path from "path";
-import Logger from "../Logger";
 
 const router: Router = Router();
 
