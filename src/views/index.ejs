@@ -13,19 +13,41 @@
     <meta name="theme-color" content="#cc9f45">
     <meta name="keywords" content="ben petrillo, petrillo, ponjo api, ponjo studios, elixir music bot, ben petrillo portfolio, ponjopastes">
     <link rel="icon" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png" type="img/png">
+    <style>
+        pre {
+            margin: 5px;
+            white-space: pre;
+        }
+        code {
+            border-radius: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: cornflowerblue;
+        }
+        .ponjo-link {
+            color: cornflowerblue;
+        }
+        .ponjo-link:hover {
+            color: cornflowerblue;
+        }
+    </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" id="hljs-theme" media="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </head>
-<body>
+<body style="background-color: #151618;">
 <div class="container my-5">
     <div class="text-center">
-        <h2 class="display-5 text-center mb-3">PonjoPastes</h2>
-        <p>
+        <h2 class="display-5 text-center mb-3 text-white">PonjoPastes</h2>
+        <p class="text-white">
             PonjoPastes is a website that allows users to share plain text through public posts known as "ponjopastes".
             Codesharing directly in IRC channels (and other messaging applications) disrupts the flow of messages or
             can alter the code itself. Users require a third-party site where they can share plain text blocks as a
             link, allowing other users to easily access and edit it.
         </p>
-        <p>
+        <p class="text-white">
             PonjoPastes makes it easy for you to share long text blocks with friends, without hassle.
         </p>
         <a href="https://pastes.ponjo.club">
@@ -33,9 +55,9 @@
                 Create Paste
             </button>
         </a>
-        <a href="https://app.ponjo.club">
+        <a href="https://pastes.ponjo.club/docs">
             <button class="btn btn-secondary" id="transform" >
-                Ponjo Studios
+                API Documentation
             </button>
         </a>
     </div>
@@ -43,14 +65,87 @@
         <form action="/" method="POST">
             <div class="form-group">
                 <label for="exampleFormControlTextarea1"></label>
-                <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="10" placeholder="Enter your paste here."></textarea>
+                <textarea name="content" class="form-control text-white" style="background-color: #282c34;" id="exampleFormControlTextarea1" rows="10" placeholder="Type something here..."></textarea>
             </div>
             <button class="btn btn-secondary" id="transform" type="submit">
                 Submit this paste!
             </button>
         </form>
     </div>
+    <h3 class="display-5 text-center mb-3 text-white mt-5">API Usage</h3>
+    <div class="container">
+        <p class="text-white text-center">
+            PonjoPastes has its own REST API that allows developers to interact with the website, creating new pastes
+            and fetching pastes by their IDs. The API is very easy to use and is documented below.
+        </p>
+        <ul class="text-white">
+            <li>
+                The base URL for the API is <strong><a class="ponjo-link" href="https://pastes.ponjo.club/api/v1">https://pastes.ponjo.club/api/v1</a></strong>.
+            </li>
+            <li>
+                You can find API implementations for Java, TypeScript, and Python below.
+            </li>
+            <li>
+                To view the full documentation, <strong><a class="ponjo-link" href="https://docs.ponjo.club">click here</a></strong>.
+            </li>
+        </ul>
+        <p class="text-white text-center">
+
+        </p>
+    </div>
+    <div class="container">
+        <pre>
+            <code class="typescript" style="padding-left: 20px; padding-right: 20px;">
+                /**
+                 * TypeScript implementation with sample response.
+                 * @endpoint /api/v1/paste
+                 */
+
+                import * as axios from "axios";
+                import {AxiosRequestConfig} from "axios";
+
+                const requestConfig: AxiosRequestConfig = {
+                    url: "https://pastes.ponjo.club/api/v1/create",
+                    method: "PUT",
+                    data: "Hello world!"
+                };
+
+                await axios.put(requestConfig)
+                    .then(response => {
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            </code>
+            <code class="json" style="padding-left: 20px; padding-right: 20px;">
+                {
+                    "message": "Success.",
+                    "paste": {
+                        "content": "An apple a day keeps the doctor away.",
+                        "id": "mvDZ1RZJG",
+                        "url": "https://pastes.ponjo.club/mvDZ1RZJG",
+                        "contentLength": 37
+                    }
+                }
+            </code>
+        </pre>
+        </pre>
+    </div>
 </div>
+<footer class="massfoot mt-auto">
+    <div class="inner text-white text-center">
+        <p style="margin-bottom: 25px;">
+            © <a href="https://ponjo.club" class="text-white text-underline">Ponjo Studios</a> 2022. All rights reserved.
+        </p>
+    </div>
+</footer>
+<script>
+    document.querySelectorAll("code").forEach(element => {
+        element.innerHTML = element.innerHTML.replace(/                /g, "");
+    });
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 </body>
 </html>
