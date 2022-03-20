@@ -1,4 +1,4 @@
-# PonjoPaste
+# PonjoPastes
 A pastebin alternative by Ponjo Studios. Easily share text and code without hassle. You can view the live deployment of this project [here](https://pastes.ponjo.club).
 
 ### Contributing
