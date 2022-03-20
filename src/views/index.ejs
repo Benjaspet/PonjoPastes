@@ -10,7 +10,7 @@
     <meta property="og:description" content="PonjoPastes is an easy-to-use paste tool that allows you to store text online for free, without a hassle.">
     <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png">
     <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png">
-    <meta name="theme-color" content="#42d45a">
+    <meta name="theme-color" content="#5aad5e">
     <meta name="keywords" content="ben petrillo, petrillo, ponjo api, ponjo studios, elixir music bot, ben petrillo portfolio, ponjopastes">
     <link rel="icon" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png" type="img/png">
     <style>
@@ -41,7 +41,7 @@
     <div class="text-center">
         <h2 class="display-5 text-center mb-3 text-white">PonjoPastes</h2>
         <p class="text-white">
-            Easily share long text blocks with friends, without hassle.
+            Easily share long text blocks with friends, without hassle. <strong><%= data.pastes %></strong> pastes and counting.
         </p>
         <a href="https://pastes.ponjo.club">
             <button class="btn btn-secondary" id="headers">
@@ -76,22 +76,19 @@
                 The base URL for the API is <strong><a class="ponjo-link" href="https://pastes.ponjo.club/api/v1">https://pastes.ponjo.club/api/v1</a></strong>.
             </li>
             <li>
-                You can find API implementations for Java, TypeScript, and Python below.
+                You can find an example TypeScript implementation below.
             </li>
             <li>
                 To view the full documentation, <strong><a class="ponjo-link" href="https://docs.ponjo.club">click here</a></strong>.
             </li>
         </ul>
-        <p class="text-white text-center">
-
-        </p>
     </div>
     <div class="container">
         <pre>
             <code class="typescript" style="padding-left: 20px; padding-right: 20px;">
                 /**
                  * TypeScript implementation with sample response.
-                 * @endpoint /api/v1/create
+                 * @endpoint /api/v1/paste
                  */
 
                 import * as axios from "axios";
@@ -123,6 +120,32 @@
                 }
             </code>
         </pre>
+        <p class="text-white">
+            This project is open source. If you'd like to view the source code or make a pull request,
+            <strong><a class="ponjo-link" href="https://github.com/Eerie6560/PonjoPastes">click here</a></strong>.
+        </p>
+        <p class="text-white">
+            Copyright 2022-Present Ben Petrillo.
+        </p>
+        <p class="text-white">
+            Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+            documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+            the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+            and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+        </p>
+        <ul class="text-white">
+            <li>
+                The above copyright notice and this permission notice shall be included in all copies or substantial
+                portions of the Software.
+            </li>
+            <li>
+                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+                LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+                NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+                WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+                SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+            </li>
+        </ul>
     </div>
 </div>
 <footer class="massfoot mt-auto">

@@ -24,7 +24,13 @@ import Logger from "../Logger";
 
 export function renderHomepage(app: Express): void {
     app.get("/", (req: Request, res: Response, next: NextFunction) => {
-        res.render("index");
+        let total: number = 0;
+        fs.readdirSync(path.join(__dirname, "../../pastes/")).forEach(() => total++);
+        res.render("index", {
+            data: {
+                pastes: total
+            }
+        });
     });
 }
 
