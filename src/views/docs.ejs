@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PonjoPastes | API</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="PonjoPastes | API">
+    <meta property="og:site_name" content="Ponjo Studios">
+    <meta property="og:description" content="PonjoPastes has its own REST API that allows developers to interact with the website.">
+    <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png">
+    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png">
+    <meta name="theme-color" content="#5aad5e">
+    <meta name="keywords" content="ben petrillo, petrillo, ponjo api, ponjo studios, elixir music bot, ben petrillo portfolio, ponjopastes">
+    <link rel="icon" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png" type="img/png">
+    <style>
+        pre {
+            margin: 5px;
+            white-space: pre;
+        }
+        code {
+            border-radius: 10px;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: cornflowerblue;
+        }
+        .ponjo-link {
+            color: cornflowerblue;
+        }
+        .ponjo-link:hover {
+            color: cornflowerblue;
+        }
+    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" id="hljs-theme" media="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+</head>
+<body style="background-color: #151618;">
+<div class="container my-5">
+    <h3 class="display-5 text-center mb-3 text-white mt-5">API Usage</h3>
+    <div class="container">
+        <p class="text-white text-center">
+            PonjoPastes has its own REST API that allows developers to interact with the website.
+        </p>
+        <ul class="text-white">
+            <li>
+                Create new pastes & fetch existing ones.
+            </li>
+            <li>
+                The base URL for the API is <strong><a class="ponjo-link" href="https://pastes.ponjo.club/api/v1">https://pastes.ponjo.club/api/v1</a></strong>.
+            </li>
+            <li>
+                All endpoints return easy-to-parse JSON responses.
+            </li>
+            <li>
+                You can find an example TypeScript implementation below.
+            </li>
+            <li>
+                To view the full documentation, <strong><a class="ponjo-link" href="https://docs.ponjo.club">click here</a></strong>.
+            </li>
+        </ul>
+    </div>
+    <div class="container">
+        <pre>
+            <code class="typescript" style="padding-left: 20px; padding-right: 20px;">
+                /**
+                 * TypeScript implementation with sample response.
+                 * @endpoint /api/v1/paste
+                 */
+
+                import * as axios from "axios";
+                import {AxiosRequestConfig} from "axios";
+
+                const requestConfig: AxiosRequestConfig = {
+                    url: "https://pastes.ponjo.club/api/v1/create",
+                    method: "PUT",
+                    data: "Hello world!"
+                };
+
+                await axios.put(requestConfig)
+                    .then(response => {
+                        console.log(response.data);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            </code>
+            <code class="json" style="padding-left: 20px; padding-right: 20px;">
+                {
+                    "message": "Success.",
+                    "paste": {
+                        "content": "Hello world!",
+                        "id": "mvDZ1RZJG",
+                        "url": "https://pastes.ponjo.club/mvDZ1RZJG",
+                        "contentLength": 37
+                    }
+                }
+            </code>
+        </pre>
+        <p class="text-white">
+            This project is open source. If you'd like to view the source code or make a pull request,
+            <strong><a class="ponjo-link" href="https://github.com/Eerie6560/PonjoPastes">click here</a></strong>.
+        </p>
+        <p class="text-white">
+            Copyright 2022-Present Ben Petrillo.
+        </p>
+        <p class="text-white">
+            Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+            documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+            the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+            and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+        </p>
+        <ul class="text-white">
+            <li>
+                The above copyright notice and this permission notice shall be included in all copies or substantial
+                portions of the Software.
+            </li>
+            <li>
+                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+                LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+                NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+                WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+                SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+            </li>
+        </ul>
+    </div>
+</div>
+<footer class="massfoot mt-auto">
+    <div class="inner text-white text-center">
+        <p style="margin-bottom: 25px;">
+            © <a href="https://ponjo.club" class="text-white text-underline">Ponjo Studios</a> 2022. All rights reserved.
+        </p>
+    </div>
+</footer>
+<script>
+    document.querySelectorAll("code").forEach(element => {
+        element.innerHTML = element.innerHTML.replace(/                /g, "");
+    });
+</script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+</body>
+</html>

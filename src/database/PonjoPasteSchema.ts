@@ -1,6 +1,5 @@
-
 /*
- * Copyright 2022 Ben Petrillo. All rights reserved.
+ * Copyright © 2022 Ben Petrillo. All rights reserved.
  *
  * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
  *
@@ -17,6 +16,19 @@
  * credit is given to the original author(s).
  */
 
-export default class Constants {
+import {Schema} from "mongoose";
+import DatabaseManager from "./DatabaseManager";
 
-}
+const PonjoPasteSchema: Schema = new Schema(
+    {
+        id: String,
+        title: String,
+        codeblock: Boolean,
+        content: String,
+    }, {
+        versionKey: false,
+        timestamps: true
+    }
+);
+
+export default new DatabaseManager().getPonjoPastesDatabase().model("pastes", PonjoPasteSchema);

@@ -17,68 +17,102 @@
  */
 
 import {Express, NextFunction, Request, Response} from "express";
-import fs from "fs";
-import path from "path";
 import shortid from "shortid";
-import Logger from "../Logger";
+import DatabaseUtil from "../database/DatabaseUtil";
 
-export function renderHomepage(app: Express): void {
-    app.get("/", (req: Request, res: Response, next: NextFunction) => {
-        let total: number = 0;
-        fs.readdirSync(path.join(__dirname, "../../pastes/")).forEach(() => total++);
-        res.render("index", {
+export async function renderHomepage(app: Express): Promise<void> {
+    app.get("/", async (req: Request, res: Response) => {
+        const pastes = await DatabaseUtil.fetchAllPastes();
+        return res.render("index", {
             data: {
-                pastes: total
+                pastes: pastes.length
             }
         });
     });
 }
+
+export function renderApiPage(app: Express): void {
+    app.get("/docs/api", (req: Request, res: Response) => {
+       return res.render("docs");
+    });
+}
+
+/**
+ * The POST route to handle form data.
+ * @param app The express app instance.
+ * @return void
+ */
 
 export function createFormPostRequest(app: Express): void {
-    app.post("/", (req: Request, res: Response, next: NextFunction) => {
-        const paste: any = req.body.content;
+    app.post("/", async(req: Request, res: Response) => {
+        const pasteData: any = req.body;
         const id: string = shortid.generate();
-        fs.writeFile(path.join(__dirname, "../../pastes/" + id + ".txt"), paste, (err) => {
-            if (err) return Logger.error(err.message);
+        const data: any = await DatabaseUtil.createPaste(
+            shortid.generate(),
+            pasteData.content,
+            pasteData.codeblock || false,
+            pasteData.title || null
+        );
+        return res.render("success", {
+           data: {
+               id: data.id,
+               href: "https://pastes.ponjo.club/" + data.id,
+               content: data.content,
+               title: data.title,
+               codeblock: data.codeblock || false
+           }
         });
+    });
+}
+
+/**
+ * The endpoint to get a paste by ID.
+ * @param app The express app instance.
+ * @return void
+ */
+
+export async function getPasteById(app: Express): Promise<void> {
+    app.get("/:id", async (req: Request, res: Response) => {
+        const data: any = await DatabaseUtil.fetchPasteById(req.params.id);
         return res.render("success", {
             data: {
-                id: id,
-                href: "https://pastes.ponjo.club/" + id,
-                content: paste
+                id: data.id,
+                href: "https://pastes.ponjo.club/" + data.id,
+                content: data.content,
+                title: data.title,
+                codeblock: data.codeblock || false
             }
         });
     });
 }
 
-export function getPasteById(app: Express): void {
-    app.get("/:id", (req: Request, res: Response, next: NextFunction) => {
-        fs.readFile(path.join(__dirname, "../../pastes/") + req.params.id + ".txt", "utf8", (err, data) => {
-            if (err) return res.render("404");
-            return res.render("success", {
-                data: {
-                    content: data.toString(),
-                    id: req.params.id,
-                    href: "https://pastes.ponjo.club/" + req.params.id
-                }
-            });
+/**
+ * Render all existing pastes.
+ * @param app The express app instance.
+ * @return void
+ */
+
+export function renderAllPastes(app: Express): void {
+    app.get("/pastes/all", async (req: Request, res: Response) => {
+        let content = []; let names = [];
+        const data: any = await DatabaseUtil.fetchAllPastes();
+        data.forEach(paste => {
+           content.push(paste.content);
+           names.push(paste.id);
         });
+        return res.render("all", {files: content, ids: names});
     });
 }
 
-export function renderAllPastes(app: Express): void {
-    app.get("/pastes/all", async (req: Request, res: Response, next: NextFunction) => {
-        let data = []; let names = [];
-        fs.readdirSync(path.join(__dirname, "/../../pastes/"), "utf8").forEach((file) => {
-            data.push(fs.readFileSync(path.join(__dirname, "/../../pastes/") + file, "utf8"));
-            names.push(file.split(".")[0]);
-        });
-        res.render("all", {files: data, ids: names});
-    });
-}
+/**
+ * The middleware to handle 404 errors.
+ * @param app The express app instance.
+ * @return void
+ */
 
 export function handle404s(app: Express): void {
     app.use((req: Request, res: Response, next: NextFunction) => {
-        return res.status(404).render("index");
+        res.status(404).render("index");
+        next();
     });
 }

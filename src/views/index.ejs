@@ -33,15 +33,13 @@
         }
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" id="hljs-theme" media="">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 </head>
 <body style="background-color: #151618;">
 <div class="container my-5">
     <div class="text-center">
         <h2 class="display-5 text-center mb-3 text-white">PonjoPastes</h2>
         <p class="text-white">
-            Easily share long text blocks with friends, without hassle. <strong><%= data.pastes %></strong> pastes and counting.
+            Easily share text snippets, without a hassle. <strong><%= data.pastes %></strong> pastes and counting.
         </p>
         <a href="https://pastes.ponjo.club">
             <button class="btn btn-secondary" id="headers">
@@ -54,98 +52,26 @@
             </button>
         </a>
     </div>
-    <div class="text-center container">
+    <div class="container text-center">
         <form action="/" method="POST">
             <div class="form-group">
                 <label for="exampleFormControlTextarea1"></label>
-                <textarea name="content" class="form-control text-white" style="background-color: #282c34;" id="exampleFormControlTextarea1" rows="10" placeholder="Type something here..."></textarea>
+                <textarea name="content" class="form-control text-white" style="background-color: #282c34;" id="exampleFormControlTextarea1" rows="10" maxlength="95000" placeholder="Paste content here..."></textarea>
+            </div>
+            <div class="form-group">
+                <label class="text-white" for="titleinput" style="padding: 2px;">Enter a title for your paste. (optional)</label>
+                <input name="title" id="titleinput" class="form-control text-white" type="text" style="background-color: #282c34;" placeholder="Title for your paste..." maxlength="50">
+            </div>
+            <div class="form-check" style="padding-bottom: 18px;">
+                <input name="codeblock" class="form-check-input" style="height: 15px; width: 15px;" type="checkbox" value="0" onclick="document.getElementById('codeblock-checkbox').value = (document.getElementById('codeblock-checkbox').value === 'yes')" id="codeblock-checkbox">
+                <label class="form-check-label text-white" for="codeblock-checkbox">
+                    This is a codeblock.
+                </label>
             </div>
             <button class="btn btn-secondary" id="transform" type="submit">
                 Submit this paste!
             </button>
         </form>
-    </div>
-    <h3 class="display-5 text-center mb-3 text-white mt-5">API Usage</h3>
-    <div class="container">
-        <p class="text-white text-center">
-            PonjoPastes has its own REST API that allows developers to interact with the website, creating new pastes
-            and fetching pastes by their IDs. The API is very easy to use and is documented below.
-        </p>
-        <ul class="text-white">
-            <li>
-                The base URL for the API is <strong><a class="ponjo-link" href="https://pastes.ponjo.club/api/v1">https://pastes.ponjo.club/api/v1</a></strong>.
-            </li>
-            <li>
-                You can find an example TypeScript implementation below.
-            </li>
-            <li>
-                To view the full documentation, <strong><a class="ponjo-link" href="https://docs.ponjo.club">click here</a></strong>.
-            </li>
-        </ul>
-    </div>
-    <div class="container">
-        <pre>
-            <code class="typescript" style="padding-left: 20px; padding-right: 20px;">
-                /**
-                 * TypeScript implementation with sample response.
-                 * @endpoint /api/v1/paste
-                 */
-
-                import * as axios from "axios";
-                import {AxiosRequestConfig} from "axios";
-
-                const requestConfig: AxiosRequestConfig = {
-                    url: "https://pastes.ponjo.club/api/v1/create",
-                    method: "PUT",
-                    data: "Hello world!"
-                };
-
-                await axios.put(requestConfig)
-                    .then(response => {
-                        console.log(response.data);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            </code>
-            <code class="json" style="padding-left: 20px; padding-right: 20px;">
-                {
-                    "message": "Success.",
-                    "paste": {
-                        "content": "Hello world!",
-                        "id": "mvDZ1RZJG",
-                        "url": "https://pastes.ponjo.club/mvDZ1RZJG",
-                        "contentLength": 37
-                    }
-                }
-            </code>
-        </pre>
-        <p class="text-white">
-            This project is open source. If you'd like to view the source code or make a pull request,
-            <strong><a class="ponjo-link" href="https://github.com/Eerie6560/PonjoPastes">click here</a></strong>.
-        </p>
-        <p class="text-white">
-            Copyright 2022-Present Ben Petrillo.
-        </p>
-        <p class="text-white">
-            Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-            documentation files (the "Software"), to deal in the Software without restriction, including without limitation
-            the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
-            and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-        </p>
-        <ul class="text-white">
-            <li>
-                The above copyright notice and this permission notice shall be included in all copies or substantial
-                portions of the Software.
-            </li>
-            <li>
-                THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-                LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-                NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-                WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-                SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-            </li>
-        </ul>
     </div>
 </div>
 <footer class="massfoot mt-auto">
@@ -155,13 +81,6 @@
         </p>
     </div>
 </footer>
-<script>
-    document.querySelectorAll("code").forEach(element => {
-        element.innerHTML = element.innerHTML.replace(/                /g, "");
-    });
-</script>
-<script>hljs.initHighlightingOnLoad();</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 </body>
 </html>

@@ -16,27 +16,18 @@
  * credit is given to the original author(s).
  */
 
-import {Express} from "express";
-import express from "express";
-import * as http from "http";
-import Logger from "./resources/Logger";
-import RestApplication from "./api/RestApplication";
-import Constants from "./resources/Constants";
-import {createFormPostRequest, renderHomepage, renderApiPage, renderAllPastes, handle404s, getPasteById} from "./api/Internals";
+import mongoose from "mongoose";
+import Constants from "../resources/Constants";
 
-const app: Express = express();
+export default class DatabaseManager {
 
-new RestApplication(app);
+    private readonly pastesDatabase;
 
-renderHomepage(app).then(() => {});
-getPasteById(app).then(() => {});
-createFormPostRequest(app);
-renderApiPage(app);
-renderAllPastes(app);
-handle404s(app);
+    constructor() {
+        this.pastesDatabase = mongoose.createConnection(Constants.MONGO_URI);
+    }
 
-const server = http.createServer(app);
-server.listen(Constants.API_PORT || 2000, () => {
-    Logger.clear();
-    Logger.info("Now running on port 2000.");
-});
+    public getPonjoPastesDatabase(): mongoose.Connection {
+        return this.pastesDatabase;
+    }
+}
