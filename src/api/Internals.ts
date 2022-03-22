@@ -16,7 +16,7 @@
  * credit is given to the original author(s).
  */
 
-import {Express, NextFunction, Request, Response} from "express";
+import {Express, Request, Response} from "express";
 import shortid from "shortid";
 import DatabaseUtil from "../database/DatabaseUtil";
 
@@ -43,10 +43,10 @@ export function renderApiPage(app: Express): void {
  * @return void
  */
 
-export function createFormPostRequest(app: Express): void {
-    app.post("/", async(req: Request, res: Response) => {
+export async function createFormPostRequest(app: Express): Promise<void> {
+    app.post("/", async (req: Request, res: Response) => {
         const pasteData: any = req.body;
-        const id: string = shortid.generate();
+        console.log(pasteData)
         const data: any = await DatabaseUtil.createPaste(
             shortid.generate(),
             pasteData.content,
@@ -59,7 +59,7 @@ export function createFormPostRequest(app: Express): void {
                href: "https://pastes.ponjo.club/" + data.id,
                content: data.content,
                title: data.title,
-               codeblock: data.codeblock || false
+               codeblock: data.codeblock
            }
         });
     });
@@ -73,16 +73,20 @@ export function createFormPostRequest(app: Express): void {
 
 export async function getPasteById(app: Express): Promise<void> {
     app.get("/:id", async (req: Request, res: Response) => {
-        const data: any = await DatabaseUtil.fetchPasteById(req.params.id);
-        return res.render("success", {
-            data: {
-                id: data.id,
-                href: "https://pastes.ponjo.club/" + data.id,
-                content: data.content,
-                title: data.title,
-                codeblock: data.codeblock || false
-            }
-        });
+        try {
+            const data: any = await DatabaseUtil.fetchPasteById(req.params.id);
+            return res.render("success", {
+                data: {
+                    id: data.id,
+                    href: "https://pastes.ponjo.club/" + data.id,
+                    content: data.content,
+                    title: data.title,
+                    codeblock: data.codeblock || false
+                }
+            });
+        } catch (err: any) {
+            return res.render("404");
+        }
     });
 }
 
@@ -110,9 +114,13 @@ export function renderAllPastes(app: Express): void {
  * @return void
  */
 
-export function handle404s(app: Express): void {
-    app.use((req: Request, res: Response, next: NextFunction) => {
-        res.status(404).render("index");
-        next();
+export async function handle404s(app: Express): Promise<void> {
+    app.use(async (req: Request, res: Response) => {
+        const pastes: any = await DatabaseUtil.fetchAllPastes();
+        return res.render("index", {
+            data: {
+                pastes: pastes.length
+            }
+        });
     });
 }

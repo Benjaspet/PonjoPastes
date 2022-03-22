@@ -63,7 +63,7 @@
                 <input name="title" id="titleinput" class="form-control text-white" type="text" style="background-color: #282c34;" placeholder="Title for your paste..." maxlength="50">
             </div>
             <div class="form-check" style="padding-bottom: 18px;">
-                <input name="codeblock" class="form-check-input" style="height: 15px; width: 15px;" type="checkbox" value="0" onclick="document.getElementById('codeblock-checkbox').value = (document.getElementById('codeblock-checkbox').value === 'yes')" id="codeblock-checkbox">
+                <input name="codeblock" class="form-check-input" style="height: 15px; width: 15px;" type="checkbox" value="" onclick="codeBlockCheck()" id="codeblock-checkbox">
                 <label class="form-check-label text-white" for="codeblock-checkbox">
                     This is a codeblock.
                 </label>
@@ -81,6 +81,16 @@
         </p>
     </div>
 </footer>
+<script>
+    function codeBlockCheck() {
+        const value = document.getElementById('codeblock-checkbox').value;
+        if (value === 'true') {
+            document.getElementById('codeblock-checkbox').value = "false";
+        } else {
+            document.getElementById('codeblock-checkbox').value = "true";
+        }
+    }
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 </body>
 </html>

@@ -20,56 +20,111 @@ import {Request, Response, Router} from "express";
 import shortid from "shortid";
 import fs from "fs";
 import path from "path";
+import DatabaseUtil from "../database/DatabaseUtil";
 
 const router: Router = Router();
 
-router.put("/create", (req: Request, res: Response) => {
-    const body: any = req.body as string;
+/**
+ * Create a paste.
+ * @route /api/v1/create
+ * @body object
+ */
+
+router.put("/create", async (req: Request, res: Response) => {
+    const body: any = req.body;
     const id: string = shortid.generate();
     try {
-        fs.writeFile(path.join(__dirname, "/../../pastes/" + id + ".txt"), body, (err) => {
-            if (err) {
-                return res.status(500).json({
-                    message: "An error occurred while processing your request."
-                });
-            } else {
-                return res.status(200).json({
-                    message: "Success.",
-                    paste: {
-                        content: body,
-                        id: id,
-                        contentLength: body.length,
-                        url: "https://pastes.ponjo.club/" + id
-                    }
-                });
+        const data: any = await DatabaseUtil.createPaste(
+            id,
+            body.content,
+            body.codeblock || false,
+            body.title || null
+        );
+        return res.status(200).json(
+            {
+                message: "Success.",
+                paste: {
+                    title: data.title,
+                    id: data.id,
+                    content: data.content,
+                    codeblock: data.codeblock
+                }
             }
-        });
-    } catch (error: any) {
-        console.log(error)
-        return res.status(500).json({
-            message: "An error occurred while processing your request."
-        });
+        );
+    } catch (err: any) {
+        return res.status(500).json(
+            {
+                message: "An error occurred while processing your request."
+            }
+        );
     }
 });
 
-router.get("/fetch/:id", (req: Request, res: Response) => {
-    fs.readFile(path.join(__dirname, "/../../pastes/") + req.params.id + ".txt", "utf8", (err, data) => {
-        if (err) {
-            return res.status(404).json({
-                message: "A paste by that ID was not found."
-            });
-        } else {
-            return res.status(200).json({
+/**
+ * Fetch a paste by ID.
+ * @route /api/v1/fetch/:id
+ * @param id The paste ID.
+ */
+
+router.get("/fetch/:id", async (req: Request, res: Response) => {
+    const id: string = req.params.id;
+    try {
+        const data: any = await DatabaseUtil.fetchPasteById(id);
+        return res.status(200).json(
+            {
                 message: "Success.",
                 paste: {
-                    content: data.toString(),
-                    id: req.params.id,
-                    url: "https://pastes.ponjo.club/" + req.params.id,
-                    contentLength: data.length
+                    title: data.title,
+                    id: data.id,
+                    content: data.content,
+                    codeblock: data.codeblock
                 }
-            })
+            }
+        );
+    } catch (err: any) {
+        return res.status(500).json(
+            {
+                message: "An error occurred while processing your request."
+            }
+        );
+    }
+});
+
+/**
+ * Fetch all existing pastes.
+ * @route /api/v1/all
+ * @param limit? The amount limit to fetch (optional).
+ */
+
+router.get("/all", async (req: Request, res: Response) => {
+    const limit: string = req.query.limit as string;
+    try {
+        const data: any = await DatabaseUtil.fetchAllPastes();
+        if (parseInt(limit) > data.length - 1) {
+            return res.status(200).json(
+                {
+                    message: "Success.",
+                    total: data.length,
+                    pastes: data
+                }
+            );
         }
-    });
+        const sliced = data.slice(0, parseInt(limit) - 1);
+        return res.status(200).json(
+            {
+                message: "Success.",
+                total: sliced.length,
+                pastes: data
+            }
+        );
+    } catch (err: any) {
+        console.log(err)
+        return res.status(500).json(
+            {
+                message: "An error occurred while processing your request."
+            }
+        );
+    }
 });
 
 export default router;

@@ -1,4 +1,9 @@
 {
+  "name": "ponjopastes",
+  "description": "A pastebin clone developed by Ponjo Studios",
+  "version": "1.2.5",
+  "author": "Ben Petrillo",
+  "license": "MIT",
   "dependencies": {
     "@types/express": "^4.17.13",
     "@types/shortid": "^0.0.29",

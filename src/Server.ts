@@ -16,13 +16,20 @@
  * credit is given to the original author(s).
  */
 
+import {
+    createFormPostRequest,
+    renderHomepage,
+    renderApiPage,
+    renderAllPastes,
+    handle404s,
+    getPasteById
+} from "./api/Internals";
 import {Express} from "express";
 import express from "express";
 import * as http from "http";
 import Logger from "./resources/Logger";
 import RestApplication from "./api/RestApplication";
 import Constants from "./resources/Constants";
-import {createFormPostRequest, renderHomepage, renderApiPage, renderAllPastes, handle404s, getPasteById} from "./api/Internals";
 
 const app: Express = express();
 
