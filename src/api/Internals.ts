@@ -98,13 +98,8 @@ export async function getPasteById(app: Express): Promise<void> {
 
 export function renderAllPastes(app: Express): void {
     app.get("/pastes/all", async (req: Request, res: Response) => {
-        let content = []; let names = [];
         const data: any = await DatabaseUtil.fetchAllPastes();
-        data.forEach(paste => {
-           content.push(paste.content);
-           names.push(paste.id);
-        });
-        return res.render("all", {files: content, ids: names});
+        return res.render("all", {data: {pastes: data}});
     });
 }
 

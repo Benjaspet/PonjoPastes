@@ -44,7 +44,7 @@ export default class RestApplication {
         this.app.set("trust proxy", "8.8.8.8");
         this.app.set("trust proxy", 1);
 
-        this.app.use(express.static(path.join(__dirname, "/../../pastes")));
+        this.app.use(express.static(path.join(__dirname, "/../public/styles")));
         this.app.use(express.static(path.join(__dirname, "/../public")));
 
     }

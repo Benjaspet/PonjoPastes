@@ -14,25 +14,16 @@
     <meta name="keywords" content="ben petrillo, petrillo, ponjo api, ponjo studios, elixir music bot, ben petrillo portfolio, ponjopastes">
     <link rel="icon" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png" type="img/png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-    <style>
-        a:hover {
-            text-decoration: underline;
-            color: cornflowerblue;
-        }
-        .ponjo-link {
-            color: cornflowerblue;
-        }
-        .ponjo-link:hover {
-            color: cornflowerblue;
-        }
-    </style>
+    <link rel="stylesheet" href="../../styles/style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" id="hljs-theme" media="">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 </head>
 <body style="background-color: #151618;">
 <div class="container my-5">
     <div class="text-center">
         <h1 class="display-5 text-center text-white mb-3">All PonjoPastes</h1>
         <p class="text-white">
-            Easily share long text blocks with friends, without hassle. <strong><%= files.length %></strong> pastes and counting.
+            Easily share long text blocks with friends, without hassle. <strong><%= data.pastes.length %></strong> pastes and counting.
         </p>
         <a href="https://pastes.ponjo.club">
             <button class="btn btn-secondary" id="headers">
@@ -46,13 +37,10 @@
         </a>
     </div>
     <hr style="padding: 10px;">
-    <% for (let i = 0; i < files.length; i++) { %>
+    <% for (let i = 0; i < data.pastes.length; i++) { %>
         <div class="card" id="paste-body">
             <div class="card-header text-white" style="background-color: #282c34">
-                ID: <%= ids[i] %> | <strong><a href="https://pastes.ponjo.club/<%= ids[i] %>" class="ponjo-link">Direct URL</a></strong>
-            </div>
-            <div class="card-body text-white" style="background-color: #282c34">
-                <pre style="white-space: pre-wrap;" class="text-white"><%= files[i] %></pre>
+                <%= data.pastes[i].title %> | ID: <strong><a href="https://pastes.ponjo.club/<%= data.pastes[i].id %>" class="ponjo-link"><%= data.pastes[i].id %></a></strong>
             </div>
         </div>
         <div style="margin: 15px;"></div>

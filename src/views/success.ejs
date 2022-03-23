@@ -15,6 +15,7 @@
     <link rel="icon" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png" type="img/png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" id="hljs-theme" media="">
+    <link rel="stylesheet" href="../../styles/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <% if (data.codeblock) { %>
         <script>
@@ -26,31 +27,6 @@
             };
         </script>
     <% } %>
-    <style>
-        a:hover {
-            text-decoration: underline;
-            color: cornflowerblue;
-        }
-        .ponjo-link {
-            color: cornflowerblue;
-        }
-        .ponjo-link:hover {
-            color: cornflowerblue;
-        }
-        .pre {
-            overflow: auto;
-        }
-        ::-webkit-scrollbar {
-            background-color: transparent;
-            width: 2px;
-            height: 2px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background-color: transparent;
-            width: 2px;
-            height: 2px;
-        }
-    </style>
 </head>
 <body style="background-color: #151618;">
 <div class="container my-5">
@@ -77,7 +53,7 @@
             ID: <%= data.id %> | <strong><a class="ponjo-link" href="<%= data.href %>">Direct URL</a></strong>
         </div>
         <div class="card-body" style="background-color: #282c34">
-            <pre class="pre-scrollable text-white" id="paste-content" style=" font-size: 13px; background-color: #282c34" class="text-white ponjo-code"><%= data.content %></pre>
+            <pre class="text-white" id="paste-content" style=" font-size: 13px; background-color: #282c34" class="text-white ponjo-code"><%= data.content %></pre>
         </div>
         <div class="btn-group">
             <button id="clipboard-button" class="btn btn-secondary">Copy raw text.</button>

@@ -1,0 +1,29 @@
+a:hover {
+    text-decoration: underline;
+    color: cornflowerblue;
+}
+
+.ponjo-link {
+    color: cornflowerblue;
+}
+
+.ponjo-link:hover {
+    color: cornflowerblue;
+}
+
+.pre {
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    background-color: #151618;
+    width: 4px;
+    height: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: grey;
+    border-radius: 12px;
+    width: 4px;
+    height: 2px;
+}
