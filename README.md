@@ -33,6 +33,39 @@ We are welcoming open-source contributors. If you'd like to make a pull request 
 }
 ```
 
+#### /api/v1/all
+
+- Fetch an array of all pastes.
+- Request method: `GET`
+
+🟢 **Status: 200** ─ Success.
+```json
+{
+  "message": "Success.",
+  "total": 0,
+  "pastes": [
+    {
+      "id": "adAHqW2PY",
+      "title": "sdfsdf",
+      "content": "private static readonly foo: string = \"bar\";",
+      "codeblock": true
+    },
+    {
+      "id": "ap6M6Aoli",
+      "title": "youtube ip rotator",
+      "content": "package com.sedmelluq.lava.extensions.youtuberotator...",
+      "codeblock": true
+    },
+    {
+      "id": "vdtdQTVXG",
+      "title": "Cyberpunk 2020 Street Weapons",
+      "content": "Blackhands Street Weapons\r\nhttps://the-eye.eu/public/Books/rpg.rem.uz/Cyberpunk/Cyberpunk%202020/Cyberpunk%202020%20-%20CP3461%20Blackhand%27s%20Street%20Weapons.pdf",
+      "codeblock": false
+    }
+  ]
+}
+```
+
 #### /api/v1/create
 
 - Create a paste.

@@ -97,23 +97,12 @@ router.get("/fetch/:id", async (req: Request, res: Response) => {
  */
 
 router.get("/all", async (req: Request, res: Response) => {
-    const limit: string = req.query.limit as string;
     try {
         const data: any = await DatabaseUtil.fetchAllPastes();
-        if (parseInt(limit) > data.length - 1) {
-            return res.status(200).json(
-                {
-                    message: "Success.",
-                    total: data.length,
-                    pastes: data
-                }
-            );
-        }
-        const sliced = data.slice(0, parseInt(limit) - 1);
         return res.status(200).json(
             {
                 message: "Success.",
-                total: sliced.length,
+                total: data.length,
                 pastes: data
             }
         );
