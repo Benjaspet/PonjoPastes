@@ -42,7 +42,7 @@ We are welcoming open-source contributors. If you'd like to make a pull request 
 ```json
 {
   "message": "Success.",
-  "total": 0,
+  "total": 3,
   "pastes": [
     {
       "id": "adAHqW2PY",
