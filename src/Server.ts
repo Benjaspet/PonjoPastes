@@ -37,10 +37,10 @@ new RestApplication(app);
 
 renderHomepage(app).then(() => {});
 getPasteById(app).then(() => {});
-createFormPostRequest(app);
+createFormPostRequest(app).then(() => {});
 renderApiPage(app);
 renderAllPastes(app);
-handle404s(app);
+handle404s(app).then(() => {});
 
 const server = http.createServer(app);
 server.listen(Constants.API_PORT || 2000, () => {
