@@ -91,6 +91,23 @@ export async function getPasteById(app: Express): Promise<void> {
 }
 
 /**
+ * The endpoint to get a paste's raw content by ID.
+ * @param app The express app instance.
+ * @return void
+ */
+
+export async function getPasteContentById(app: Express): Promise<void> {
+    app.get("/raw/:id", async (req: Request, res: Response) => {
+        try {
+            const data: any = await DatabaseUtil.fetchPasteById(req.params.id);
+            return res.contentType("text/plain").send(data.content);
+        } catch (err: any) {
+            return res.render("404");
+        }
+    });
+}
+
+/**
  * Render all existing pastes.
  * @param app The express app instance.
  * @return void
