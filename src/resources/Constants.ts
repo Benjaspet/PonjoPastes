@@ -22,6 +22,6 @@ import config from "../../config.json";
 export default class Constants {
 
     public static MONGO_URI: string = config.MONGOURI;
-    public static API_PORT: number = config.PORT;
+    public static API_PORT: number = config["PORT"] || 2000;
 
 }

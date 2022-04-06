@@ -22,7 +22,7 @@ import {
     renderApiPage,
     renderAllPastes,
     handle404s,
-    getPasteById
+    getPasteById, getPasteContentById
 } from "./api/Internals";
 import {Express} from "express";
 import express from "express";
@@ -37,13 +37,14 @@ new RestApplication(app);
 
 renderHomepage(app).then(() => {});
 getPasteById(app).then(() => {});
+getPasteContentById(app).then(() => {});
 createFormPostRequest(app).then(() => {});
 renderApiPage(app);
 renderAllPastes(app);
 handle404s(app).then(() => {});
 
 const server = http.createServer(app);
-server.listen(Constants.API_PORT || 2000, () => {
+server.listen(Constants.API_PORT, () => {
     Logger.clear();
-    Logger.info("Now running on port 2000.");
+    Logger.info(`Now running on port ${Constants.API_PORT}`);
 });
