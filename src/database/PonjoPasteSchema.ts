@@ -1,34 +1,31 @@
-/*
- * Copyright © 2022 Ben Petrillo. All rights reserved.
- *
- * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
- * OR OTHER DEALINGS IN THE SOFTWARE.
- *
- * All portions of this software are available for public use, provided that
- * credit is given to the original author(s).
- */
+import { Schema, Connection } from "mongoose";
 
-import {Schema} from "mongoose";
-import DatabaseManager from "./DatabaseManager";
+export interface Paste {
+    id: string;
+    title?: string | "Untitled";
+    content: string;
+    codeblock: boolean;
+}
 
-const PonjoPasteSchema: Schema = new Schema(
+export const PonjoPasteSchema: Schema = new Schema(
     {
         id: String,
-        title: String,
-        codeblock: Boolean,
+        title: {
+            type: String,
+            default: "Untitled"
+        },
         content: String,
-    }, {
+        codeblock: {
+            type: Boolean,
+            default: false
+        },
+    },
+    {
         versionKey: false,
         timestamps: true
     }
 );
 
-export default new DatabaseManager().getPonjoPastesDatabase().model("pastes", PonjoPasteSchema);
+export const getPasteModel = (connection: Connection) => {
+    return connection.models.pastes || connection.model("pastes", PonjoPasteSchema);
+};

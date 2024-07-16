@@ -1,7 +1,5 @@
 /*
- * Copyright © 2022 Ben Petrillo. All rights reserved.
- *
- * Project licensed under the MIT License: https://www.mit.edu/~amini/LICENSE.md
+ * Copyright © 2024 Ben Petrillo. All rights reserved.
  *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
  * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
@@ -12,39 +10,71 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
  * OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * All portions of this software are available for public use, provided that
- * credit is given to the original author(s).
+ * All portions of this software are available for public use,
+ * provided that credit is given to the original author(s).
  */
 
-import {
-    createFormPostRequest,
-    renderHomepage,
-    renderApiPage,
-    renderAllPastes,
-    handle404s,
-    getPasteById, getPasteContentById
-} from "./api/Internals";
-import {Express} from "express";
+import { Express, Router } from "express";
 import express from "express";
-import * as http from "http";
-import Logger from "./resources/Logger";
-import RestApplication from "./api/RestApplication";
-import Constants from "./resources/Constants";
+import config from "../config.json";
+import * as bodyParser from "body-parser";
+import path from "path";
+
+import { body, param, query } from "express-validator";
+
+import baseController from "./controller/BaseController";
+import pasteController from "./controller/PasteController";
+import { logger } from "./Logger";
+import Database from "./database/Database";
+import pasteRouter from "./routers/PasteRouter";
 
 const app: Express = express();
+const router: Router = Router();
+const database: Database = new Database();
 
-new RestApplication(app);
+(async () => {
+    try {
+        await database.connect();
+    } catch (error) {
+        process.exit(1);
+    }
+})();
 
-renderHomepage(app).then(() => {});
-getPasteById(app).then(() => {});
-getPasteContentById(app).then(() => {});
-createFormPostRequest(app).then(() => {});
-renderApiPage(app);
-renderAllPastes(app);
-handle404s(app).then(() => {});
+app.set("trust proxy", "127.0.0.1")
+app.set("trust proxy", "8.8.8.8");
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-const server = http.createServer(app);
-server.listen(Constants.API_PORT, () => {
-    Logger.clear();
-    Logger.info(`Now running on port ${Constants.API_PORT}`);
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public/styles")));
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.raw({ limit: "50mb" }));
+app.use(bodyParser.text({ limit: "50mb" }));
+app.use("/", router);
+
+app.use("/api/v2/pastes", pasteRouter);
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE");
+    logger.debug(`${req.method} ${req.path}`);
+    next();
 });
+
+app.get("/", baseController.renderHomepage);
+app.get("/createform", baseController.renderPasteFormPage);
+app.get("/all", baseController.renderAllPastes);
+app.get("/paste/:id", baseController.renderPasteById);
+app.post("/post/create", baseController.parseCreatePasteFormInput);
+
+app.use((_req, res, next) => {
+    res.status(404).render("404");
+    next();
+});
+
+app.listen(config.port, () => {
+    console.clear(); logger.info(`Now running on http://localhost:${config.port}.`);
+});
+
+export default database;

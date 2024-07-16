@@ -16,18 +16,27 @@
  * credit is given to the original author(s).
  */
 
-import mongoose from "mongoose";
-import Constants from "../resources/Constants";
+import { ILogObj, Logger } from "tslog";
 
-export default class DatabaseManager {
-
-    private readonly pastesDatabase;
-
-    constructor() {
-        this.pastesDatabase = mongoose.createConnection(Constants.MONGO_URI);
+const timestamp: string = "[{{yyyy}}-{{mm}}-{{dd}} {{hh}}:{{MM}}:{{ss}}]";
+export const logger: Logger<ILogObj> = new Logger({
+    name: "Portfolio API",
+    type: "pretty",
+    stylePrettyLogs: true,
+    prettyLogTemplate: `${timestamp} [{{logLevelName}}] [{{filePathWithLine}}] ➞ `,
+    prettyLogTimeZone: "local",
+    prettyLogStyles: {
+        logLevelName: {
+            INFO: ['bold', 'blue'],
+            DEBUG: ['bold', 'green'],
+            WARN: ['bold', 'yellow'],
+            ERROR: ['bold', 'red'],
+        },
+        yyyy: 'magenta', mm: 'magenta', dd: 'magenta', hh: 'magenta', MM: 'magenta', ss: 'magenta',
+        filePathWithLine: 'magenta',
     }
+});
 
-    public getPonjoPastesDatabase(): mongoose.Connection {
-        return this.pastesDatabase;
-    }
-}
+export default {
+    logger
+};
