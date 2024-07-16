@@ -1,5 +1,4 @@
 import {Router} from "express";
-import baseController from "../controller/BaseController";
 import {body, param, query} from "express-validator";
 import pasteController from "../controller/PasteController";
 import {logger} from "../Logger";

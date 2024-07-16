@@ -64,7 +64,7 @@ app.use((req, res, next) => {
 app.get("/", baseController.renderHomepage);
 app.get("/about", baseController.renderAboutPage);
 app.get("/createform", baseController.renderPasteFormPage);
-app.get("/all", baseController.renderAllPastes);
+app.get("/browse", baseController.renderAllPastes);
 app.get("/paste/:id", baseController.renderPasteById);
 app.post("/post/create", baseController.parseCreatePasteFormInput);
 

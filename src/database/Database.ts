@@ -58,7 +58,13 @@ export default class Database {
     public async searchForPaste(query: string) : Promise<Paste[]> {
         await this.ensureConnectionReady();
         const PonjoPasteModel = getPasteModel(this.connection!);
-        const data = await PonjoPasteModel.find({ content: { $regex: query, $options: "i" } });
+        const data = await PonjoPasteModel.find({
+            $or: [
+                { title: { $regex: query, $options: "i" } },
+                { content: { $regex: query, $options: "i" } },
+                { id: query }
+            ],
+        });
         if (!data) {
             throw new PasteNotFoundException("No pastes found.");
         }
