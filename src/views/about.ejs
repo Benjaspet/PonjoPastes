@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>About · Ponjo.Pastes</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="About · Ponjo.Pastes">
+    <meta property="og:site_name" content="Ponjo Studios">
+    <meta property="og:description" content="Welcome to Ponjo.Pastes, your secure solution for storing and sharing code snippets effortlessly. We understand that developers often need a reliable and simple way to manage their code, whether for personal use or collaborative projects. That's why we created Ponjo.Pastes—to make code snippet storage easy and secure.">
+    <meta property="og:image:url" content="https://img.icons8.com/?size=100&id=baTWeZAqG8lF&format=png&color=228BE6">
+    <meta property="og:image:secure_url" content="https://img.icons8.com/?size=100&id=baTWeZAqG8lF&format=png&color=228BE6">
+    <meta name="theme-color" content="#5aad5e">
+    <meta name="keywords" content="ben petrillo, ponjo api, ponjo studios, elixir music, ben petrillo portfolio, ponjopastes">
+    <link rel="icon" href="https://img.icons8.com/?size=100&id=baTWeZAqG8lF&format=png&color=228BE6" type="img/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body class="pt-5" style="background-color: #1f2021;">
+<nav class="navbar navbar-expand-lg bg-dark bg-body-tertiary fixed-top" data-bs-theme="dark">
+    <div class="container-fluid">
+        <img class="" src="https://img.icons8.com/?size=100&id=baTWeZAqG8lF&format=png&color=228BE6" width="30" height="30" alt="">
+        <a class="navbar-brand ps-2" href="#">
+            Ponjo.Pastes
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/createform">Create Paste</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/all">Browse</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://docs.benpetrillo.dev">API Docs</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        External Links
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" target="_blank" href="https://ponjo.benpetrillo.dev">About Us</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://github.com/Benjaspet/ponjo.pastes">View Source Code</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://benpetrillo.dev">benpetrillo.dev</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" action="/api/v2/pastes/search" method="get">
+                <input class="form-control me-2" type="search" name="q" placeholder="Search pastes..." aria-label="Search">
+                <input type="hidden" name="source" value="web">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="container pr-2 pl-2 my-4 justify-content-center mt-5" data-bs-theme="dark">
+    <div class="card text-center">
+        <div class="card-header">
+            <div class="mb-3 mt-2 rounded-3" style="overflow: hidden; max-height: 150px;">
+                <img src="https://wallpapercave.com/wp/wp4247401.jpg" class="card-img-top" alt="..." style="filter: blur(8px); -webkit-filter: blur(8px);">
+            </div>
+            <ul class="nav nav-tabs card-header-tabs" id="navTabs" style="cursor: pointer">
+                <li class="nav-item">
+                    <a class="nav-link active text-secondary-emphasis" aria-current="true" data-target="#activeContent">
+                        About & Mission
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary-emphasis" href="#" data-target="#featuresContent">
+                        Features
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary-emphasis" data-target="#whyUsContent">
+                        Why Us?
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body mt-3">
+            <div id="cardText">
+                <div id="activeContent" class="tab-content">
+                    <h5 class="card-title">About & Mission</h5>
+                    <p>
+                        Welcome to Ponjo.Pastes, your secure solution for storing and sharing code
+                        snippets effortlessly. We understand that developers often need a reliable
+                        and simple way to manage their code, whether for personal use or
+                        collaborative projects. That's why we created Ponjo.Pastes—to make code
+                        snippet storage easy and secure.
+                    </p>
+                    <p>
+                        At Ponjo.Pastes, our mission is to provide a straightforward platform that
+                        enables developers to store, retrieve, and share code snippets without the
+                        hassle. We prioritize security and simplicity, ensuring that your data is
+                        protected while remaining easily accessible. We believe that every developer
+                        deserves a tool that simplifies their workflow and enhances productivity.
+                    </p>
+                </div>
+                <div id="featuresContent" class="tab-content" style="display: none;">
+                    <h5 class="mb-2">Secure Storage</h5>
+                    <p>
+                        Your code snippets are stored with the highest security standards. We utilize
+                        state-of-the-art encryption methods, including AES-256 encryption, to protect
+                        your data from unauthorized access. Each snippet is securely stored in our
+                        cloud infrastructure, ensuring redundancy and reliability. With Ponjo.Pastes,
+                        you can rest assured that your intellectual property is safe and sound.
+                    </p>
+                    <h5 class="m-2">Organized & User-Friendly UI</h5>
+                    <p>
+                        Our intuitive design makes it easy for anyone, regardless of technical skill
+                        level, to navigate and use the platform. The clean layout allows for quick
+                        access to your snippets, with clearly labeled sections and search functionality.
+                        Whether you're saving a quick note or managing an extensive library of code,
+                        Ponjo.Pastes simplifies the process for you. We have automated syntax
+                        highlighting for visually-appealing representations of your code.
+
+                        Categorize and tag your snippets for easy retrieval. Our organization
+                        features allow you to keep your code library neat and accessible, so you
+                        can find what you need quickly. Utilize a powerful search function to
+                        locate any code snippet in seconds. You'll spend less time searching and
+                        more time coding.
+                    </p>
+                    <h5 class="m-2">Effortless Sharing</h5>
+                    <p>
+                        Sharing code snippets with colleagues or friends is a breeze. With just a
+                        few clicks, you can generate secure, shareable links to your snippets,
+                        allowing for instant collaboration. We are currently working on a feature
+                        to allow you to set permissions on shared snippets, deciding whether
+                        others can view or edit them. This makes Ponjo.Pastes an excellent tool
+                        for team projects, peer reviews, or educational purposes.
+                    </p>
+                    <p>
+                        Access your code snippets from anywhere, on any device. Our responsive
+                        design ensures a seamless experience whether you're on a desktop, tablet,
+                        or smartphone. Whether you're at your desk, on the go, or collaborating in
+                        a meeting, Ponjo.Pastes ensures you can retrieve your snippets whenever
+                        you need them, making it a versatile tool for modern developers.
+                    </p>
+                </div>
+                <div id="whyUsContent" class="tab-content" style="display: none;">
+                    <h5 class="mt-2">
+                        Why us?
+                    </h5>
+                    <p>
+                        I'm <a href="https://benpetrillo.dev">Ben Petrillo</a>, the lead
+                        software development engineer for Ponjo.Pastes. As a developer who
+                        often collaborates with others, I've found that time and time again
+                        I need to share code with other developers when working on my own
+                        personal projects and on group projects. Supporting Ponjo.Pastes
+                        means supporting a platform that is designed with developers in mind.
+                        I am running this service at no cost, for the community.
+                        We are committed to continuously improving our services and features based
+                        on user feedback, and supporting us would mean supporting solo
+                        developers. If you're interested in donating to support my work,
+                        feel free to email me at <a href="mailto:me@benpetrillo.dev">me@benpetrillo.dev</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <footer class="py-1 my-1">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-secondary">About</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-secondary">Create Paste</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-secondary">API Documentation</a></li>
+        </ul>
+        <p class="text-center text-secondary mb-0">Copyright © 2024 Ben Petrillo</p>
+        <p class="text-center text-secondary mt-0">Made with ♥ and Express️</p>
+    </footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script>
+    document.querySelectorAll('#navTabs a').forEach(tab => {
+        tab.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            document.querySelectorAll('#navTabs a').forEach(link => link.classList.remove('active'));
+            this.classList.add('active');
+
+            document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
+            const targetContent = this.getAttribute('data-target');
+            document.querySelector(targetContent).style.display = 'block';
+        });
+    });
+</script>
+</body>
+</html>

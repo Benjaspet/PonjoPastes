@@ -21,13 +21,12 @@ import database from "../Server";
 import ShortUniqueId from "short-unique-id";
 
 const renderHomepage = async (_req: Request, res: Response) => {
-    const pastes: Paste[] = await database.getAllPastes();
-    return res.render("index", {
-        data: {
-            pastes: pastes.length
-        }
-    });
+    return res.render("index");
 };
+
+const renderAboutPage = async (_req: Request, res: Response) => {
+    return res.render("about");
+}
 
 export const renderAllPastes = async (_req: Request, res: Response) => {
     const pastes: Paste[] = await database.getAllPastes();
@@ -91,6 +90,7 @@ export const parseCreatePasteFormInput = async (req: Request, res: Response) => 
 
 export default {
     renderHomepage,
+    renderAboutPage,
     renderPasteById,
     renderAllPastes,
     renderPasteFormPage,
