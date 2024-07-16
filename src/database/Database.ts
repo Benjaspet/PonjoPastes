@@ -54,4 +54,14 @@ export default class Database {
         }
         return data.map(paste => paste.toObject());
     }
+
+    public async searchForPaste(query: string) : Promise<Paste[]> {
+        await this.ensureConnectionReady();
+        const PonjoPasteModel = getPasteModel(this.connection!);
+        const data = await PonjoPasteModel.find({ content: { $regex: query, $options: "i" } });
+        if (!data) {
+            throw new PasteNotFoundException("No pastes found.");
+        }
+        return data.map(paste => paste.toObject());
+    }
 }

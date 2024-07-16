@@ -1,16 +1,3 @@
-a:hover {
-    text-decoration: underline;
-    color: cornflowerblue;
-}
-
-.ponjo-link {
-    color: cornflowerblue;
-}
-
-.ponjo-link:hover {
-    color: cornflowerblue;
-}
-
 .pre {
     overflow: auto;
     white-space: pre-wrap;

@@ -1,45 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Ponjo Pastes</title>
+    <title>Home · Ponjo.Pastes</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="og:title" content="PonjoPastes">
+    <meta property="og:title" content="Ponjo.Pastes">
     <meta property="og:site_name" content="Ponjo Studios">
-    <meta property="og:description" content="PonjoPastes is an easy-to-use paste tool that allows you to store text online for free, without a hassle.">
-    <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png">
-    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png">
-    <meta name="theme-color" content="#5aad5e">
-    <meta name="keywords" content="ben petrillo, petrillo, ponjo api, ponjo studios, elixir music bot, ben petrillo portfolio, ponjopastes">
+    <meta property="og:description" content="Your go-to platform for sharing code snippets with ease and efficiency. Join the community that offers a seamless experience to store, manage, and share your code in just a few clicks.">
+    <meta property="og:image:url" content="https://img.icons8.com/?size=100&id=baTWeZAqG8lF&format=png&color=228BE6">
+    <meta property="og:image:secure_url" content="https://img.icons8.com/?size=100&id=baTWeZAqG8lF&format=png&color=228BE6">
+    <meta name="theme-color" content="#228BE6">
+    <meta name="keywords" content="ben petrillo, ponjo api, ponjo studios, elixir music, ben petrillo portfolio, ponjopastes">
     <link rel="icon" href="https://img.icons8.com/?size=100&id=baTWeZAqG8lF&format=png&color=228BE6" type="img/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        pre {
-            margin: 5px;
-            white-space: pre;
-        }
-        code {
-            border-radius: 10px;
-        }
-        a:hover {
-            text-decoration: underline;
-            color: #51a3f5;
-        }
-        .ponjo-link {
-            color: #51a3f5;
-        }
-        .ponjo-link:hover {
-            color: #51a3f5;
-        }
-    </style>
 </head>
 <body class="pt-5" style="background-color: #1f2021;">
 <nav class="navbar navbar-expand-lg bg-dark bg-body-tertiary fixed-top" data-bs-theme="dark">
     <div class="container-fluid">
         <img class="" src="https://img.icons8.com/?size=100&id=baTWeZAqG8lF&format=png&color=228BE6" width="30" height="30" alt="">
         <a class="navbar-brand ps-2" href="#">
-            Ponjo Pastes
+            Ponjo.Pastes
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -47,28 +28,29 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="/createform">Create Paste</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Create Paste</a>
+                    <a class="nav-link" target="_blank" href="https://docs.benpetrillo.dev">API Docs</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         External Links
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">View Source Code</a></li>
-                        <li><a class="dropdown-item" href="#">Contribute!</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://ponjo.benpetrillo.dev">About Us</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://github.com/Benjaspet/ponjo.pastes">View Source Code</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="https://benpetrillo.dev">benpetrillo.dev</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://benpetrillo.dev">benpetrillo.dev</a></li>
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" action="/api/v2/pastes/search" method="get">
+                <input class="form-control me-2" type="search" name="q" placeholder="Search pastes..." aria-label="Search">
+                <input type="hidden" name="source" value="web">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
@@ -146,27 +128,6 @@
             </p>
         </div>
     </div>
-<!--    <div class="container text-center">-->
-<!--        <form action="/create" method="POST">-->
-<!--            <div class="form-group mt-4">-->
-<!--                <label class="text-white" for="titleinput" style="padding: 2px;">Enter a title for your paste. (optional)</label>-->
-<!--                <input name="title" id="titleinput" class="form-control text-white" type="text" style="background-color: #282c34;" placeholder="Title for your paste..." maxlength="50">-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--                <label class="text-white" for="exampleFormControlTextarea1">Enter the content of your paste.</label>-->
-<!--                <textarea name="content" class="form-control text-white" style="background-color: #282c34;" id="exampleFormControlTextarea1" rows="10" maxlength="95000" placeholder="Paste content here..." required="required"></textarea>-->
-<!--            </div>-->
-<!--            <div class="form-check" style="padding-bottom: 18px;">-->
-<!--                <input name="codeblock" class="form-check-input" style="height: 15px; width: 15px;" type="checkbox" value="" onclick="codeBlockCheck()" id="codeblock-checkbox">-->
-<!--                <label class="form-check-label text-white" for="codeblock-checkbox">-->
-<!--                    This is a codeblock.-->
-<!--                </label>-->
-<!--            </div>-->
-<!--            <button class="btn btn-secondary" id="transform" type="submit">-->
-<!--                Submit this paste!-->
-<!--            </button>-->
-<!--        </form>-->
-<!--    </div>-->
 </div>
 <div class="container">
     <footer class="py-1 my-1">
@@ -180,16 +141,6 @@
         <p class="text-center text-secondary mt-0">Made with ♥ and Express️</p>
     </footer>
 </div>
-<script>
-    function codeBlockCheck() {
-        const value = document.getElementById('codeblock-checkbox').value;
-        if (value === 'true') {
-            document.getElementById('codeblock-checkbox').value = "false";
-        } else {
-            document.getElementById('codeblock-checkbox').value = "true";
-        }
-    }
-</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

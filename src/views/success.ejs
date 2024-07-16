@@ -1,95 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title><%= data.title ? data.title : "Paste | " + data.id %></title>
+    <title><%= data.title %> · Ponjo.Pastes</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="<%= data.title ? data.title : "Paste | " + data.id %>">
     <meta property="og:site_name" content="Paste ID: <%= data.id %>">
-    <meta property="og:description" content="<%= data.content %>">
-    <meta property="og:image:url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png">
-    <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png">
-    <meta name="theme-color" content="#5aad5e">
-    <meta name="keywords" content="ben petrillo, petrillo, ponjo api, ponjo studios, elixir music bot, ben petrillo portfolio, ponjopastes">
-    <link rel="icon" href="https://raw.githubusercontent.com/Eerie6560/Archives/main/images/icons/PonjoPastes.png" type="img/png">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-dark.min.css" id="hljs-theme" media="">
+    <meta property="og:description" content="<%= data.content.length > 50 ? data.content.substring(0, 48) : data.content %>">
+    <meta property="og:image:url" content="https://img.icons8.com/?size=100&id=baTWeZAqG8lF&format=png&color=228BE6">
+    <meta property="og:image:secure_url" content="https://img.icons8.com/?size=100&id=baTWeZAqG8lF&format=png&color=228BE6">
+    <meta name="theme-color" content="#228BE6">
+    <meta name="keywords" content="ben petrillo, ponjo api, ponjo studios, elixir music, ben petrillo portfolio, ponjopastes">
+    <link rel="icon" href="https://img.icons8.com/?size=100&id=baTWeZAqG8lF&format=png&color=228BE6" type="img/png">
     <link rel="stylesheet" href="../../styles/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-    <% if (data.codeblock) { %>
-        <script>
-            window.onload = function() {
-                const blocks = document.getElementsByTagName("pre");
-                for (let i = 0; i < blocks.length; i++) {
-                    hljs.highlightBlock(blocks[i]);
-                }
-            };
-        </script>
-    <% } %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script>
+        window.onload = function() {
+            const blocks = document.getElementsByTagName("pre");
+            for (let i = 0; i < blocks.length; i++) {
+                hljs.highlightBlock(blocks[i]);
+            }
+        };
+
+        function nl2br(str) {
+            return str.replace(/\n/g, '<br>');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const contentElement = document.getElementById('paste-content');
+            contentElement.innerHTML = nl2br(contentElement.innerHTML);
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/atom-one-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
-<body style="background-color: #151618;">
-<div class="container my-5">
-    <div class="text-center">
-        <h2 class="display-5 text-center text-white mb-3"><%= data.title ? data.title : data.id %></h2>
-        <p>
-            <strong>
-                <a class="ponjo-link" id="paste-content2" href="<%= data.href %>"><%= data.href %></a>
-            </strong>
-        </p>
-        <a href="https://pastes.ponjo.club">
-            <button class="btn btn-secondary" id="headers">
-                Create Paste
-            </button>
+<body class="pt-5" style="background-color: #1f2021;">
+<nav class="navbar navbar-expand-lg bg-dark bg-body-tertiary fixed-top" data-bs-theme="dark">
+    <div class="container-fluid">
+        <img class="" src="https://img.icons8.com/?size=100&id=baTWeZAqG8lF&format=png&color=228BE6" width="30" height="30" alt="">
+        <a class="navbar-brand ps-2" href="#">
+            Ponjo.Pastes
         </a>
-        <a href="https://docs.ponjo.club">
-            <button class="btn btn-secondary" id="transform" >
-                API Documentation
-            </button>
-        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/createform">Create Paste</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="https://docs.benpetrillo.dev">API Docs</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        External Links
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" target="_blank" href="https://ponjo.benpetrillo.dev">About Us</a></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://github.com/Benjaspet/ponjo.pastes">View Source Code</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" target="_blank" href="https://benpetrillo.dev">benpetrillo.dev</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex" action="/api/v2/pastes/search" method="get">
+                <input class="form-control me-2" type="search" name="q" placeholder="Search pastes..." aria-label="Search">
+                <input type="hidden" name="source" value="web">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
     </div>
-    <div class="card mt-3" id="paste-body">
-        <div class="card-header text-white" style="background-color: #282c34">
-            ID: <%= data.id %> | <strong><a class="ponjo-link" href="<%= data.href %>">Direct URL</a></strong>
-        </div>
-        <div class="card-body" style="background-color: #282c34">
-            <pre class="text-white" id="paste-content" style=" font-size: 13px; background-color: #282c34" class="text-white ponjo-code"><%= data.content %></pre>
-        </div>
-        <div class="btn-group">
-            <button id="clipboard-button" class="btn btn-secondary">Copy raw text.</button>
-            <button id="clipboard-button2" class="btn btn-secondary">Copy direct link.</button>
+</nav>
+<div class="container pr-2 pl-2 my-5">
+    <div class="card border-secondary" data-bs-theme="dark">
+        <h5 class="card-header">
+            <%= data.title %> · <%= data.id %>
+        </h5>
+        <div class="card-body">
+            <div class="card-body rounded-4" style="background-color: #282c34">
+                <% if (data.codeblock) { %>
+                    <pre class="text-white" id="paste-content" style=" font-size: 13px; background-color: #282c34" class="text-white ponjo-code"><%= data.content %></pre>
+                <% } else { %>
+                    <p class="card-text" id="paste-content"><%= data.content %></p>
+                <% } %>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6">
+                    <button id="raw-text-button" class="btn btn-primary w-100">Copy Raw Text</button>
+                </div>
+                <div class="col-6">
+                    <button href="<%= "https://pastes.benpetrillo.dev/paste/" + data.id %>" id="direct-link-button" class="btn btn-primary w-100">Copy Direct Link</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<footer class="massfoot mt-auto">
-    <div class="inner text-white text-center">
-        <p style="margin-bottom: 25px;">
-            © <a href="https://ponjo.club" class="text-white text-underline">Ponjo Studios</a> 2022. All rights reserved.
-        </p>
-    </div>
-</footer>
+<div class="container">
+    <footer class="py-1 my-1">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-secondary">About</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-secondary">Create Paste</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-secondary">API Documentation</a></li>
+        </ul>
+        <p class="text-center text-secondary mb-0">Copyright © 2024 Ben Petrillo</p>
+        <p class="text-center text-secondary mt-0">Made with ♥ and Express️</p>
+    </footer>
+</div>
 </body>
 </html>
 <script>hljs.initHighlightingOnLoad();</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script type="text/javascript">
-    document.getElementById("clipboard-button").addEventListener("click", () => {
+    document.getElementById("raw-text-button").addEventListener("click", () => {
         const copyText = document.getElementById("paste-content").innerText;
         navigator.clipboard.writeText(copyText).then(() => {
-            document.getElementById("clipboard-button").innerText = "Copied!";
+            document.getElementById("raw-text-button").innerText = "Copied!";
         })
         document.querySelector(".pre").addEventListener("click", () => {
             navigator.clipboard.writeText(copyText).then(() => {});
         });
     });
-    document.getElementById("clipboard-button2").addEventListener("click", () => {
-        const copyText2 = document.getElementById("paste-content2").innerText;
+    document.getElementById("direct-link-button").addEventListener("click", () => {
+        const copyText2 = document.getElementById("direct-link-button").getAttribute("href");
         navigator.clipboard.writeText(copyText2).then(() => {
-            document.getElementById("clipboard-button2").innerText = "Copied!";
+            document.getElementById("direct-link-button").innerText = "Copied!";
         })
         document.querySelector(".pre").addEventListener("click", () => {
             navigator.clipboard.writeText(copyText2).then(() => {});
         });
     });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

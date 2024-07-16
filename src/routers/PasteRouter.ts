@@ -36,4 +36,12 @@ pasteRouter.get("/get/:id",
         .withMessage("ID must be exactly 15 characters long."),
     pasteController.getPasteById);
 
+pasteRouter.get("/search",
+    query("q")
+        .isString()
+        .withMessage("Query must be a string.")
+        .notEmpty()
+        .withMessage("Query must not be empty."),
+    pasteController.searchForPaste);
+
 export default pasteRouter;

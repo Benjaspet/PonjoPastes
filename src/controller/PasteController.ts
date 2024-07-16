@@ -24,7 +24,6 @@ import database from "../Server";
 import {Result, ValidationError, validationResult} from "express-validator";
 import PasteNotFoundException from "../exception/PasteNotFoundException";
 import ShortUniqueId from "short-unique-id";
-import config from "../../config.json";
 
 export const getAllPastes = async (_req: Request, res: Response) => {
     try {
@@ -82,6 +81,41 @@ export const getPasteById = async (req: Request, res: Response) => {
     }
 }
 
+export const searchForPaste = async (req: Request, res: Response) => {
+    const result: Result<ValidationError> = validationResult(req);
+    try {
+        const { q, source } = req.query as ParsedQs;
+        const query: string = q as string;
+        const pastes: Paste[] = await database.searchForPaste(decodeURIComponent(query));
+        if (!source || source !== "web") {
+            return res.status(200)
+                .json({ pastes: pastes.map(paste => {
+                    return {
+                        id: paste.id,
+                        title: paste.title,
+                        content: paste.content,
+                        codeblock: paste.codeblock
+                    };
+                }
+            )});
+        }
+        return res.status(200)
+            .render("all", {
+                data: {
+                    pastes: pastes.reverse()
+                }
+            });
+    } catch (error: any) {
+        if (result.array().length > 0) {
+            return res.status(400)
+                .json({ errors: result.array() });
+        }
+        return res.status(500)
+            .json({ error: error });
+    }
+
+}
+
 export const createPaste = async (req: Request, res: Response) => {
     const result: Result<ValidationError> = validationResult(req);
     try {
@@ -111,5 +145,6 @@ export const createPaste = async (req: Request, res: Response) => {
 export default {
     getAllPastes,
     getPasteById,
+    searchForPaste,
     createPaste
 }
