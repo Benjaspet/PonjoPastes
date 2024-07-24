@@ -19,9 +19,6 @@ import express from "express";
 import config from "../config.json";
 import * as bodyParser from "body-parser";
 import path from "path";
-
-import { body, param, query } from "express-validator";
-
 import baseController from "./controller/BaseController";
 import { logger } from "./Logger";
 import Database from "./database/Database";

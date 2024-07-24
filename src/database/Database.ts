@@ -35,6 +35,18 @@ export default class Database {
         return data.toObject();
     }
 
+    public async updatePaste(old: Paste, updated: Paste): Promise<Paste> {
+        await this.ensureConnectionReady();
+        const PonjoPasteModel = getPasteModel(this.connection!);
+        const data = await PonjoPasteModel.findOneAndUpdate({ id: old.id }, updated, { new: true });
+        logger.info(data)
+        if (!data) {
+            throw new PasteNotFoundException("Paste not found.");
+        }
+        logger.info(`Updated paste with id ${old.id}.`);
+        return data.toObject();
+    }
+
     public async getPaste(id: string): Promise<Paste> {
         await this.ensureConnectionReady();
         const PonjoPasteModel = getPasteModel(this.connection!);

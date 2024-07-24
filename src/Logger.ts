@@ -23,7 +23,7 @@ export const logger: Logger<ILogObj> = new Logger({
     name: "Portfolio API",
     type: "pretty",
     stylePrettyLogs: true,
-    prettyLogTemplate: `${timestamp} [{{logLevelName}}] [{{filePathWithLine}}] ➞ `,
+    prettyLogTemplate: `${timestamp} [{{logLevelName}}] ➞ `,
     prettyLogTimeZone: "local",
     prettyLogStyles: {
         logLevelName: {
@@ -36,7 +36,3 @@ export const logger: Logger<ILogObj> = new Logger({
         filePathWithLine: 'magenta',
     }
 });
-
-export default {
-    logger
-};

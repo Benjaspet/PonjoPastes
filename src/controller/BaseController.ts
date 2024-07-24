@@ -19,6 +19,7 @@ import { Paste } from "../database/PonjoPasteSchema";
 import {Result, ValidationError, validationResult} from "express-validator";
 import database from "../Server";
 import ShortUniqueId from "short-unique-id";
+import {logger} from "../Logger";
 
 const renderHomepage = async (_req: Request, res: Response) => {
     return res.render("index");
@@ -42,16 +43,24 @@ export const renderPasteById = async (req: Request, res: Response) => {
         validationResult(req);
         const { id } = req.params;
         const paste: Paste = await database.getPaste(id);
+        await database.updatePaste(paste, {
+            ...paste,
+            views: paste.views + 1
+        });
         return res.status(200)
             .render("success", {
                 data: {
                     id: paste.id,
                     title: paste.title,
                     content: paste.content,
-                    codeblock: paste.codeblock
+                    codeblock: paste.codeblock,
+                    views: paste.views,
+                    likes: paste.likes,
+                    createdAt: paste.createdAt
                 }
             });
     } catch (error: any) {
+        logger.error(error);
         return res.status(500).json({ error });
     }
 }
@@ -69,7 +78,10 @@ export const parseCreatePasteFormInput = async (req: Request, res: Response) => 
                 id: new ShortUniqueId().rnd(15),
                 title: title,
                 content: content,
-                codeblock: codeblock
+                codeblock: codeblock,
+                views: 0,
+                likes: 0,
+                createdAt: new Date()
             });
         return res.status(200)
             .render("success", {
@@ -77,7 +89,10 @@ export const parseCreatePasteFormInput = async (req: Request, res: Response) => 
                     id: data.id,
                     title: data.title,
                     content: data.content,
-                    codeblock: data.codeblock
+                    codeblock: data.codeblock,
+                    views: data.views,
+                    likes: data.likes,
+                    createdAt: data.createdAt
                 }
             });
     } catch (error: any) {

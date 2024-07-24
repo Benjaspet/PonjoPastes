@@ -5,6 +5,9 @@ export interface Paste {
     title?: string | "Untitled";
     content: string;
     codeblock: boolean;
+    views: number;
+    likes: number;
+    createdAt: Date;
 }
 
 export const PonjoPasteSchema: Schema = new Schema(
@@ -19,6 +22,22 @@ export const PonjoPasteSchema: Schema = new Schema(
             type: Boolean,
             default: false
         },
+        views: {
+            type: Number,
+            default: 0
+        },
+        likes: {
+            type: Number,
+            default: 0
+        },
+        createdAt: {
+            type: Date,
+            default: Date.now
+        },
+        updatedAt: {
+            type: Date,
+            default: Date.now
+        }
     },
     {
         versionKey: false,

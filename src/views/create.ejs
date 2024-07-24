@@ -73,15 +73,12 @@
         </div>
         <form action="/post/create" method="POST" id="pasteForm" data-bs-theme="dark">
             <div class="mb-3 form-floating text-secondary-emphasis">
-                <input type="text" class="form-control bg-dark" id="title" name="title" placeholder="" aria-describedby="titleHelp">
+                <input required type="text" class="form-control bg-dark" id="title" name="title" placeholder="" aria-describedby="titleHelp">
                 <label for="title">Paste Title</label>
-                <div id="titleHelp" class="form-text">
-                    This is used to describe the content of your paste.
-                </div>
             </div>
             <div class="mb-3 text-secondary-emphasis">
                 <label for="content" class="form-label">Paste Content</label>
-                <textarea class="form-control" id="content" name="content" rows="5"></textarea>
+                <textarea required class="form-control" id="content" name="content" rows="5"></textarea>
             </div>
             <div class="form-check text-secondary-emphasis">
                 <input class="form-check-input" type="checkbox" value="true" id="codeblock-checkbox" name="codeblock">

@@ -24,6 +24,7 @@ import database from "../Server";
 import {Result, ValidationError, validationResult} from "express-validator";
 import PasteNotFoundException from "../exception/PasteNotFoundException";
 import ShortUniqueId from "short-unique-id";
+import {logger} from "../Logger";
 
 export const getAllPastes = async (_req: Request, res: Response) => {
     try {
@@ -34,7 +35,10 @@ export const getAllPastes = async (_req: Request, res: Response) => {
                     id: paste.id,
                     title: paste.title,
                     content: paste.content,
-                    codeblock: paste.codeblock
+                    codeblock: paste.codeblock,
+                    views: paste.views || 0,
+                    likes: paste.likes || 0,
+                    createdAt: paste.createdAt
                 };
             }
         )});
@@ -64,10 +68,14 @@ export const getPasteById = async (req: Request, res: Response) => {
                     id: paste.id,
                     title: paste.title,
                     content: paste.content,
-                    codeblock: paste.codeblock
+                    codeblock: paste.codeblock,
+                    views: paste.views,
+                    likes: paste.likes,
+                    createdAt: paste.createdAt
                 });
         }
     } catch (error: any) {
+        logger.error(error);
         if (result.array().length > 0) {
             return res.status(400)
                 .json({ errors: result.array() });
@@ -94,7 +102,10 @@ export const searchForPaste = async (req: Request, res: Response) => {
                         id: paste.id,
                         title: paste.title,
                         content: paste.content,
-                        codeblock: paste.codeblock
+                        codeblock: paste.codeblock,
+                        views: paste.views,
+                        likes: paste.likes,
+                        createdAt: paste.createdAt
                     };
                 }
             )});
@@ -102,7 +113,17 @@ export const searchForPaste = async (req: Request, res: Response) => {
         return res.status(200)
             .render("all", {
                 data: {
-                    pastes: pastes.reverse()
+                    pastes: pastes.reverse().map(paste => {
+                        return {
+                            id: paste.id,
+                            title: paste.title,
+                            content: paste.content,
+                            codeblock: paste.codeblock,
+                            views: paste.views,
+                            likes: paste.likes,
+                            createdAt: paste.createdAt
+                        };
+                    })
                 }
             });
     } catch (error: any) {
@@ -125,14 +146,20 @@ export const createPaste = async (req: Request, res: Response) => {
                 id: new ShortUniqueId().rnd(15),
                 title: title,
                 content: content,
-                codeblock: codeblock
+                codeblock: codeblock,
+                views: 0,
+                likes: 0,
+                createdAt: new Date()
             });
         return res.status(200)
             .json({
                 id: data.id,
                 title: data.title,
                 content: data.content,
-                codeblock: data.codeblock
+                codeblock: data.codeblock,
+                views: data.views,
+                likes: data.likes,
+                createdAt: data.createdAt
             });
     } catch (error: any) {
         if (result.array().length > 0) {

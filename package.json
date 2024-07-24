@@ -5,7 +5,8 @@
   "author": "Ben Petrillo",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/Server.ts"
+    "start": "bun run src/Server.ts",
+    "dev": "bun --watch run src/Server.ts"
   },
   "dependencies": {
     "@types/express": "^4.17.21",
